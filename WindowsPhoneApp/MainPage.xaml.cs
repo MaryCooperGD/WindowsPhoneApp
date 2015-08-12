@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.Storage.Streams;
+using Windows.UI.Popups;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -39,62 +41,45 @@ namespace WindowsPhoneApp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // TODO: Prepare page for display here.
-
-            // TODO: If your application contains multiple pages, ensure that you are
-            // handling the hardware Back button by registering for the
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
-            // If you are using the NavigationHelper provided by some templates,
-            // this event is handled for you.
-            readCurrentLocation();
-            
+            readCurrentLocation();           
         }
-
-        private void addMarker(Geoposition position)
-        {
-            MapIcon icon = new MapIcon();
-            icon.Title = "My position";
-            icon.Location = position.Coordinate.Point;
-            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Square71x71Logo.scale-240.png"));
-        }
-
+      
         private async void readCurrentLocation()
         {
+            
+            Geolocator locator = new Geolocator();
 
-            /*var gl = new Geolocator() { DesiredAccuracy = PositionAccuracy.High };
-            Geoposition location = await gl.GetGeopositionAsync(TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5));
-            var pin = new MapIcon()
+            if(locator.LocationStatus == PositionStatus.Disabled)
             {
-                Location = location.Coordinate.Point,
+                MessageDialog msg = new MessageDialog("GPS is not enabled.");
+                await msg.ShowAsync();
+            }
+            Geoposition position = await locator.GetGeopositionAsync();
+
+            myMapControl.ZoomLevel = 12;
+            myMapControl.LandmarksVisible = true;
+            MapIcon icon = new MapIcon()
+            {
+                Location = position.Coordinate.Point,
                 Title = "You are here",
                 NormalizedAnchorPoint = new Point() { X = 0, Y = 0 },
             };
-            MapControl.MapElements.Add(pin);
-            await MapControl.TrySetViewAsync(location.Coordinate.Point, 12);*/
-            Geolocator locator = new Geolocator();
-            Geoposition position = await locator.GetGeopositionAsync();
-           /* MapControl.Center = new Geopoint(new BasicGeoposition()
-            {
-                Latitude = position.Coordinate.Point.Position.Latitude,
-                Longitude = position.Coordinate.Point.Position.Longitude
-            });*/
-            MapControl.ZoomLevel = 12;
-            MapControl.LandmarksVisible = true;
-            MapIcon icon = new MapIcon();
             icon.Title = "My position";
             icon.Location = position.Coordinate.Point;
-            // addMarker(position);
-            MapControl.MapElements.Add(icon);
-            MapControl.Center = position.Coordinate.Point;
-            await MapControl.TrySetViewAsync(position.Coordinate.Point,15);
+            myMapControl.MapElements.Add(icon);
+            myMapControl.Center = position.Coordinate.Point;
+            await myMapControl.TrySetViewAsync(position.Coordinate.Point, 15);
+
+           await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                startPositionChangeListener(locator);
+            });
             
-            
-            //this.Dispatcher.RunAsync(startPositionChangeListener(locator));
         }
 
         private void startPositionChangeListener(Geolocator locator)
         {
-            locator.MovementThreshold = 100;
+            locator.MovementThreshold = 5;
             locator.ReportInterval = 5 * 1000;
             locator.DesiredAccuracy = PositionAccuracy.High;
         }
