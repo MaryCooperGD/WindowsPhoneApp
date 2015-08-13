@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Windows.Phone.UI.Input;
+using Parse;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -37,6 +38,7 @@ namespace WindowsPhoneApp
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            ParseClient.Initialize("YAdyflvC7l17jwCteJduTjJPCqkmdYiqIHz59La1", "GNLsANQvuUncRwSVrl0CsFEDGovgIUKoPhiyc6Nj");
         }
 
         /// <summary>
