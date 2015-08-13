@@ -13,21 +13,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace WindowsPhoneApp
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class RegistrationPage : Page
     {
-        public MainPage()
+        public RegistrationPage()
         {
             this.InitializeComponent();
-
-            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         /// <summary>
@@ -37,24 +34,11 @@ namespace WindowsPhoneApp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-                      
         }
 
-        private void GoToMapPage(object sender, RoutedEventArgs e)
+        private void enter_submit(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MapPage));
+            //create new instance in db
         }
-
-        private void RegisterButton_Pressed(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(RegistrationPage));
-        }
-
-        private void LoginButton_Pressed(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(LoginPage));
-        }
-      
-        
     }
 }

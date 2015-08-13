@@ -18,7 +18,7 @@
                    VerticalAlignment="Top">
         <Run Text="Are you hungry and you don't know where to eat?"/>
             <LineBreak/>
-            <Run Text="Street food will find you the nearest open places for you."/>
+            <Run Text="Street food will find for you the nearest open places for you."/>
             <LineBreak/>
             <Run Text="Be sure to turn on your GPS before using the app."/>
             <LineBreak/>
@@ -30,5 +30,31 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,200"/>
+        
+        <TextBlock Text="Are you a owner?"
+                   VerticalAlignment="Bottom"
+                   FontSize="16"
+                   HorizontalAlignment="Center"
+                   Margin="10,0,0,130" Opacity="0.6"/>
+        
+        <Button x:Name="LoginButton"
+            Content="Login" Opacity="0.6"
+                VerticalAlignment="Bottom"
+                Margin="30,0,0,60"
+                HorizontalAlignment="Left"
+                Click="LoginButton_Pressed"/>
+
+        <Button x:Name="RegisterButton" 
+            Content="Register" Opacity="0.6"
+                VerticalAlignment="Bottom"
+                Margin="0,0,30,60"
+                HorizontalAlignment="Right"
+                Click="RegisterButton_Pressed"/>
+        <TextBlock Text="or"
+                   VerticalAlignment="Bottom"
+                   FontSize="16"
+                   Opacity="0.6"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,80"/>
     </Grid>
 </Page>

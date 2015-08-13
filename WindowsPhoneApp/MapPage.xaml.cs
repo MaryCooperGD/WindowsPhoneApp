@@ -40,6 +40,8 @@ namespace WindowsPhoneApp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             readCurrentLocation();
+            
+
         }
 
         private async void readCurrentLocation()
@@ -82,5 +84,13 @@ namespace WindowsPhoneApp
             locator.ReportInterval = 5 * 1000;
             locator.DesiredAccuracy = PositionAccuracy.High;
         }
+
+        private async void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            
+            int value = (int)e.NewValue;
+            MessageDialog msg = new MessageDialog("Value: " +value);
+            await msg.ShowAsync();
+        }        
     }
 }

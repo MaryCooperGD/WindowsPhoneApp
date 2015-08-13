@@ -15,5 +15,17 @@
             MapServiceToken="AjEZ-b8X6ryrr9PCwx1h2WOGpkB_xiNT_qB5t42HSqzchmri57-w6BYnrDX1pIfh"
            Height="500" Width="300"
             HorizontalAlignment="Center"/>
+        <Slider x:Name="kmSlider"                
+                Minimum="1"
+                Maximum="21"
+            HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom" Width="300"
+                Background="CadetBlue"
+                ValueChanged="Slider_ValueChanged"
+                TickPlacement="Inline"
+                TickFrequency="1"
+                Foreground="AliceBlue"/>
+
+
     </Grid>
 </Page>

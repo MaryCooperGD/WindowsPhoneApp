@@ -1,0 +1,29 @@
+﻿<Page
+    x:Class="WindowsPhoneApp.RegistrationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsPhoneApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBox x:Name="Name"
+                 PlaceholderText="Business name"
+                 Margin="10,180"
+                 HorizontalAlignment="Stretch"/>
+        <TextBox x:Name="Location"
+                 PlaceholderText="Street, Number, Province,State/Region"
+                 Margin="10,250"
+                 HorizontalAlignment="Stretch"/>
+
+        <Button x:Name="submitRegistrationButton"
+                HorizontalAlignment="Center"
+                Content="Submit"
+                Margin="0,20,0,0"
+                Click="enter_submit"/>
+
+
+    </Grid>
+</Page>
