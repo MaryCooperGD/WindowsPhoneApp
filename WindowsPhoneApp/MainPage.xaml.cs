@@ -12,11 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.Devices.Geolocation;
-using Windows.UI.Xaml.Controls.Maps;
-using Windows.Storage.Streams;
-using Windows.UI.Popups;
-using Windows.UI.Core;
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -41,47 +37,14 @@ namespace WindowsPhoneApp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            readCurrentLocation();           
+                      
+        }
+
+        private void GoToMapPage(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MapPage));
         }
       
-        private async void readCurrentLocation()
-        {
-            
-            Geolocator locator = new Geolocator();
-
-            if(locator.LocationStatus == PositionStatus.Disabled)
-            {
-                MessageDialog msg = new MessageDialog("GPS is not enabled.");
-                await msg.ShowAsync();
-            }
-            Geoposition position = await locator.GetGeopositionAsync();
-
-            myMapControl.ZoomLevel = 12;
-            myMapControl.LandmarksVisible = true;
-            MapIcon icon = new MapIcon()
-            {
-                Location = position.Coordinate.Point,
-                Title = "You are here",
-                NormalizedAnchorPoint = new Point() { X = 0, Y = 0 },
-            };
-            icon.Title = "My position";
-            icon.Location = position.Coordinate.Point;
-            myMapControl.MapElements.Add(icon);
-            myMapControl.Center = position.Coordinate.Point;
-            await myMapControl.TrySetViewAsync(position.Coordinate.Point, 15);
-
-           await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                startPositionChangeListener(locator);
-            });
-            
-        }
-
-        private void startPositionChangeListener(Geolocator locator)
-        {
-            locator.MovementThreshold = 5;
-            locator.ReportInterval = 5 * 1000;
-            locator.DesiredAccuracy = PositionAccuracy.High;
-        }
+        
     }
 }

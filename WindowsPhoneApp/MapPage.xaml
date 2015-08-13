@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="WindowsPhoneApp.MapPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsPhoneApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Maps:MapControl
+            x:Name="myMapControl"
+            MapServiceToken="AjEZ-b8X6ryrr9PCwx1h2WOGpkB_xiNT_qB5t42HSqzchmri57-w6BYnrDX1pIfh"
+           Height="500" Width="300"
+            HorizontalAlignment="Center"/>
+    </Grid>
+</Page>

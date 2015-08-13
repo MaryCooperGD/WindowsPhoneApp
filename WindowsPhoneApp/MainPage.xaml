@@ -5,15 +5,30 @@
     xmlns:local="using:WindowsPhoneApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Maps:MapControl
-            x:Name="myMapControl"
-            MapServiceToken="AjEZ-b8X6ryrr9PCwx1h2WOGpkB_xiNT_qB5t42HSqzchmri57-w6BYnrDX1pIfh"
-           Height="500" Width="300"
-            HorizontalAlignment="Center"/>
+        <TextBlock Text="STREET FOOD"
+                   FontSize="40" Margin="10,33,10,0"
+                   VerticalAlignment="Top"/>
+
+        <TextBlock Margin="10,130,10,0" FontSize="20"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Top">
+        <Run Text="Are you hungry and you don't know where to eat?"/>
+            <LineBreak/>
+            <Run Text="Street food will find you the nearest open places for you."/>
+            <LineBreak/>
+            <Run Text="Be sure to turn on your GPS before using the app."/>
+            <LineBreak/>
+            <Run Text="Have a nice meal!"/>
+        </TextBlock>
+        
+        <Button x:Name="ToMapPage" 
+                Content="Go!" Click="GoToMapPage"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,200"/>
     </Grid>
 </Page>
