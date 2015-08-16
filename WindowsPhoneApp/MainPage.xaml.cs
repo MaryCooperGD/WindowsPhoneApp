@@ -12,7 +12,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using Windows.Services.Maps;
+using Windows.Devices.Geolocation;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -28,6 +30,40 @@ namespace WindowsPhoneApp
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            readCurrentLocation();
+
+        }
+
+
+        private async void readCurrentLocation()
+        {
+            Geolocator locator = new Geolocator();
+
+            if (locator.LocationStatus == PositionStatus.Disabled)
+            {
+                MessageDialog msg = new MessageDialog("GPS is not enabled.");
+                await msg.ShowAsync();
+            }
+            else
+            {
+                Geoposition position = await locator.GetGeopositionAsync();
+
+                BasicGeoposition queryHint = new BasicGeoposition();
+                queryHint.Latitude = position.Coordinate.Latitude;
+                queryHint.Longitude = position.Coordinate.Longitude;
+
+                var result = await MapLocationFinder.FindLocationsAsync("Via busseto 15, Riccione", new Geopoint(queryHint));
+
+                // Get the coordinates
+                if (result.Status == MapLocationFinderStatus.Success)
+                {
+                    double lat = result.Locations[0].Point.Position.Latitude;
+                    double lon = result.Locations[0].Point.Position.Longitude;
+
+                    MessageDialog msg = new MessageDialog("Latitude: " + lat + "Longitude: "+lon);
+                    await msg.ShowAsync();
+                }
+            }
         }
 
         /// <summary>
