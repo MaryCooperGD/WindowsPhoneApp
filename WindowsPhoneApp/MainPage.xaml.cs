@@ -52,7 +52,7 @@ namespace WindowsPhoneApp
                 queryHint.Latitude = position.Coordinate.Latitude;
                 queryHint.Longitude = position.Coordinate.Longitude;
 
-                var result = await MapLocationFinder.FindLocationsAsync("Via busseto 15, Riccione", new Geopoint(queryHint));
+                var result = await MapLocationFinder.FindLocationsAsync("Via busseto 15, Riccione", new Geopoint(queryHint),3);
 
                 // Get the coordinates
                 if (result.Status == MapLocationFinderStatus.Success)
