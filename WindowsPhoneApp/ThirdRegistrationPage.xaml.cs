@@ -20,9 +20,9 @@ namespace WindowsPhoneApp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RegistrationPage : Page
+    public sealed partial class ThirdRegistrationPage : Page
     {
-        public RegistrationPage()
+        public ThirdRegistrationPage()
         {
             this.InitializeComponent();
         }
@@ -34,11 +34,12 @@ namespace WindowsPhoneApp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
         }
 
-        private void enter_submit(object sender, RoutedEventArgs e)
+        private void submit_final(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SecondRegistrationPage));
+
         }
     }
 }

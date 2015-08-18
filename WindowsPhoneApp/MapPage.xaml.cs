@@ -40,8 +40,6 @@ namespace WindowsPhoneApp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             readCurrentLocation();
-            
-
         }
 
         private async void readCurrentLocation()
@@ -89,7 +87,7 @@ namespace WindowsPhoneApp
         {
             
             int value = (int)e.NewValue;
-            MessageDialog msg = new MessageDialog("Value: " +value);
+            MessageDialog msg = new MessageDialog("Range of " +value+" km.");
             await msg.ShowAsync();
         }        
     }

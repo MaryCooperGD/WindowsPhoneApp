@@ -26,12 +26,14 @@
         <TextBox x:Name="TypeBox" 
             HorizontalAlignment="Stretch" 
                  Margin="10,186,10,0" 
-                 PlaceholderText="Restaurant type (ex. Steak house...)"  />
+                 PlaceholderText="Business type (Steak house, restaurant,fast food, grocery...)" 
+                 TextWrapping="Wrap"
+                 Height="40"/>
         <TextBox x:Name="DescriptionBox"
             HorizontalAlignment="Stretch" 
-                 Margin="10,290,10,0" 
-                
-                 PlaceholderText="Tell us more about yor company..." Height="122" 
+                 Margin="10,290,10,0"    
+                 TextWrapping="Wrap"
+                 PlaceholderText="Business description" Height="122" 
                  />
 
 
