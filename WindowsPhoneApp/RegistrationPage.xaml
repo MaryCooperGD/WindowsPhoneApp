@@ -19,12 +19,12 @@
                  HorizontalAlignment="Stretch"/>
 
         <Button x:Name="submitRegistrationButton"
-                HorizontalAlignment="Center"
+                Style="{StaticResource Buttons}"
                 Content="Submit"
                 Margin="143,449,148,134"
                 Click="enter_submit"/>
         <TextBox x:Name="TypeBox" 
-            HorizontalAlignment="Stretch" 
+                 HorizontalAlignment="Stretch" 
                  Margin="10,186,10,0" 
                  PlaceholderText="Business type (Steak house, restaurant,fast food, grocery...)" 
                  TextWrapping="Wrap"

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -37,8 +38,19 @@ namespace WindowsPhoneApp
 
         }
 
-        private void submit_final(object sender, RoutedEventArgs e)
+        private async void submit_final(object sender, RoutedEventArgs e)
         {
+            MessageDialog msg;
+            if(string.IsNullOrEmpty(usr.Text) || string.IsNullOrEmpty(psw.Password))
+            {
+               msg  = new MessageDialog("Please, fill all the fields!");
+                await msg.ShowAsync();
+            }
+            else
+            {
+                msg = new MessageDialog("Thank you for your registration!");
+                await msg.ShowAsync();
+            }
 
         }
     }

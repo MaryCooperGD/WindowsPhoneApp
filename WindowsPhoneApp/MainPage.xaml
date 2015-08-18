@@ -27,9 +27,9 @@
         
         <Button x:Name="ToMapPage" 
                 Content="Go!" Click="GoToMapPage"
-                HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Margin="0,0,0,200"/>
+                Margin="0,0,0,200"
+                Style="{StaticResource Buttons}"/>
         
         <TextBlock Text="Are you a owner?"
                    VerticalAlignment="Bottom"
@@ -40,15 +40,15 @@
         <Button x:Name="LoginButton"
             Content="Login" Opacity="0.6"
                 VerticalAlignment="Bottom"
-                Margin="30,0,0,60"
-                HorizontalAlignment="Left"
+                Margin="0,0,200,60"
+                Style="{StaticResource Buttons}"                
                 Click="LoginButton_Pressed"/>
 
         <Button x:Name="RegisterButton" 
             Content="Register" Opacity="0.6"
                 VerticalAlignment="Bottom"
-                Margin="0,0,30,60"
-                HorizontalAlignment="Right"
+                Margin="200,0,0,60"
+                Style="{StaticResource Buttons}"
                 Click="RegisterButton_Pressed"/>
         <TextBlock Text="or"
                    VerticalAlignment="Bottom"

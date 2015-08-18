@@ -20,9 +20,9 @@
                  VerticalAlignment="Top"/>
         
         <Button x:Name="enterLoginButton"
-                HorizontalAlignment="Center"
                 Content="Enter"
                 Margin="0,20,0,0"
-                Click="enter_login"/>
+                Click="enter_login"
+                Style="{StaticResource Buttons}"/>
     </Grid>
 </Page>

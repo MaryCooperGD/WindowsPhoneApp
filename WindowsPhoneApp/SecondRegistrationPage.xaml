@@ -71,9 +71,9 @@
 
         <Button x:Name="submitOpeningTimes"
                 VerticalAlignment="Bottom"
-                HorizontalAlignment="Center"
                 Content="Submit"
                 Margin="0,0,0,10"
-                Click="times_submitted"/>
+                Click="times_submitted"
+                Style="{StaticResource Buttons}"/>
     </Grid>
 </Page>
