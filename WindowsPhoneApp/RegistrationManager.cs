@@ -30,7 +30,7 @@ namespace WindowsPhoneApp
         public static IDictionary<string, TimeSpan> daytime = new Dictionary<string,TimeSpan>(); /* Instead of timespan, we need a custom class to assign 4 times for each day */
 
         /*Private, singleton pattern*/
-        private RegistrationManager() { }
+       /* private RegistrationManager() { }*/
     
     }
 }

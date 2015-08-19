@@ -35,7 +35,8 @@
                    VerticalAlignment="Bottom"
                    FontSize="16"
                    HorizontalAlignment="Center"
-                   Margin="10,0,0,130" Opacity="0.6"/>
+                   Margin="10,0,0,130" Opacity="0.6"
+                   x:Name="ownerText"/>
         
         <Button x:Name="LoginButton"
             Content="Login" Opacity="0.6"
@@ -55,6 +56,23 @@
                    FontSize="16"
                    Opacity="0.6"
                    HorizontalAlignment="Center"
-                   Margin="0,0,0,80"/>
+                   Margin="0,0,0,80"
+                   x:Name="or"/>
+        
+        <TextBlock Text="Welcome!"
+                   VerticalAlignment="Bottom"
+                   FontSize="16"
+                   HorizontalAlignment="Left"
+                   Margin="10,0,0,130" Opacity="0.6"
+                   x:Name="welcomeText"
+                   Visibility="Collapsed"/>
+
+        <Button x:Name="ProfileButton"
+            Content="Manage your business" Opacity="0.6"
+                VerticalAlignment="Bottom"
+                Margin="0,0,200,60"
+                Style="{StaticResource Buttons}"                
+                Click="ProfileButton_Pressed"
+                Visibility="Collapsed"/>
     </Grid>
 </Page>

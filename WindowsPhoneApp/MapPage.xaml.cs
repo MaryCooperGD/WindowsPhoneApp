@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Core;
+using Windows.Services.Maps;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -73,6 +74,26 @@ namespace WindowsPhoneApp
                 {
                     startPositionChangeListener(locator);
                 });
+
+                //position finder via adress
+                Geoposition pos = await locator.GetGeopositionAsync();
+
+                BasicGeoposition queryHint = new BasicGeoposition();
+                queryHint.Latitude = pos.Coordinate.Latitude;
+                queryHint.Longitude = pos.Coordinate.Longitude;
+
+                var result = await MapLocationFinder.FindLocationsAsync("Via busseto 15, Riccione", new Geopoint(queryHint), 3);
+
+                // Get the coordinates
+                if (result.Status == MapLocationFinderStatus.Success)
+                {
+                    double lat = result.Locations[0].Point.Position.Latitude;
+                    double lon = result.Locations[0].Point.Position.Longitude;
+
+                    MessageDialog msg = new MessageDialog("Latitude: " + lat + "Longitude: " + lon);
+                    await msg.ShowAsync();
+                }
+
             }
         }
 

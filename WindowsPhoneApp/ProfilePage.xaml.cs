@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,9 +20,9 @@ namespace WindowsPhoneApp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ThirdRegistrationPage : Page
+    public sealed partial class ProfilePage : Page
     {
-        public ThirdRegistrationPage()
+        public ProfilePage()
         {
             this.InitializeComponent();
         }
@@ -35,27 +34,11 @@ namespace WindowsPhoneApp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
-        }
-
-        private async void submit_final(object sender, RoutedEventArgs e)
-        {
-            MessageDialog msg;
-            if(string.IsNullOrEmpty(usr.Text) || string.IsNullOrEmpty(psw.Password))
+            if(localSettings.Values["Username"]!= null)
             {
-               msg  = new MessageDialog("Please, fill all the fields!");
-                await msg.ShowAsync();
-            }
-            else
-            {
-                msg = new MessageDialog("Thank you for your registration!");
-                await msg.ShowAsync();
-                //if DB saving went ok
-                var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-                localSettings.Values["Username"] = usr.Text;
-                localSettings.Values["Logged"] = true;        
-                Frame.Navigate(typeof(MainPage));
-                Frame.BackStack.Clear();  
+                wlcmUser.Text = wlcmUser.Text + (String)localSettings.Values["Username"];
             }
         }
     }
