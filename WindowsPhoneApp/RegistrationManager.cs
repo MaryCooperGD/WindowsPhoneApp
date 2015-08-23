@@ -29,7 +29,7 @@ namespace WindowsPhoneApp
 
         /*Private, singleton pattern*/
         private RegistrationManager() { }
-
+    
         public RegistrationManager getInstance()
         {
             return this.manager;

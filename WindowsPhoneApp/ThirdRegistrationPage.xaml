@@ -14,8 +14,9 @@
                    FontSize="30"
                    Margin="10"
                    Opacity="0.7"
-                   x:Name="usr"/>
+                   />
         <TextBox
+            x:Name="usr"
             PlaceholderText="Username"
             Margin="10,200,10,0"
             />

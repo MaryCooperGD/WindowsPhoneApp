@@ -100,7 +100,8 @@ namespace WindowsPhoneApp
                     throw new Exception("Failed to create initial page");
                 }
             }
-
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["Logged"] = false;
             // Ensure the current window is active
             Window.Current.Activate();
         }
@@ -146,7 +147,8 @@ namespace WindowsPhoneApp
                 frame.GoBack();
                 e.Handled = true;
             }   
-
         }
+
+        
     }
 }

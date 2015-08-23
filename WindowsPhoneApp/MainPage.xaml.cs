@@ -30,12 +30,12 @@ namespace WindowsPhoneApp
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
-            readCurrentLocation();
+           // readCurrentLocation();
 
         }
 
 
-        private async void readCurrentLocation()
+       /* private async void readCurrentLocation()
         {
             Geolocator locator = new Geolocator();
 
@@ -64,7 +64,7 @@ namespace WindowsPhoneApp
                     await msg.ShowAsync();
                 }
             }
-        }
+        }*/
 
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
@@ -73,7 +73,16 @@ namespace WindowsPhoneApp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-                      
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            if(localSettings.Values["Logged"]!= null && localSettings.Values["Logged"].Equals(true))
+            {
+                or.Visibility = Visibility.Collapsed;
+                ownerText.Visibility = Visibility.Collapsed;
+                LoginButton.Visibility = Visibility.Collapsed;
+                RegisterButton.Visibility = Visibility.Collapsed;
+                welcomeText.Visibility = Visibility.Visible;
+                ProfileButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void GoToMapPage(object sender, RoutedEventArgs e)
@@ -89,6 +98,11 @@ namespace WindowsPhoneApp
         private void LoginButton_Pressed(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(LoginPage));
+        }
+
+        private void ProfileButton_Pressed(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ProfilePage));
         }
       
         

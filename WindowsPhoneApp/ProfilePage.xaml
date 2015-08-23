@@ -1,0 +1,29 @@
+﻿<Page
+    x:Class="WindowsPhoneApp.ProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsPhoneApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <TextBlock Text="Welcome "
+                   FontSize="30"
+                   Margin="10"
+                   Opacity="0.7" 
+                   x:Name="wlcmUser"/>
+        
+        <TextBlock Text="TODO: show informations about the business"
+                   FontSize="20"
+                   Margin="10,60,10,0"
+                   TextWrapping="Wrap"
+                   Opacity="0.7"
+                   />
+        <Button Style="{StaticResource Buttons}"
+                Content="Manage opening times"
+                Margin="0,0,150,0"/>
+    </Grid>
+</Page>
