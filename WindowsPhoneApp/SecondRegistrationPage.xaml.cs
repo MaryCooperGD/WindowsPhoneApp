@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Services.Maps;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -25,6 +27,7 @@ namespace WindowsPhoneApp
     {
         List<String> daysList = new List<String>();
         int times;
+        private RegistrationManager manager = RegistrationManager.getInstance();
         
         public SecondRegistrationPage()
         {
@@ -54,21 +57,33 @@ namespace WindowsPhoneApp
             {
                 case 0:
                     days.Text = "Tuesday";
+                    manager.addDayTime(RegistrationManager.DayOfWeek.MON.ToString(), new DayTimespan(openingAMTimePicker.Time,closingAMTimePicker.Time,
+                        openingPMTimePicker.Time,closingPMTimePicker.Time));
                     break;
                 case 1:
                     days.Text = "Wednesday";
+                    manager.addDayTime(RegistrationManager.DayOfWeek.TUE.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                       openingPMTimePicker.Time, closingPMTimePicker.Time));
                     break;
                 case 2:
                     days.Text = "Thursday";
+                    manager.addDayTime(RegistrationManager.DayOfWeek.WED.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                       openingPMTimePicker.Time, closingPMTimePicker.Time));
                     break;
                 case 3:
                     days.Text = "Friday";
+                    manager.addDayTime(RegistrationManager.DayOfWeek.THU.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                       openingPMTimePicker.Time, closingPMTimePicker.Time));
                     break;
                 case 4:
                     days.Text = "Saturday";
+                    manager.addDayTime(RegistrationManager.DayOfWeek.FRI.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                       openingPMTimePicker.Time, closingPMTimePicker.Time));
                     break;
                 case 5:
                     days.Text = "Sunday";
+                    manager.addDayTime(RegistrationManager.DayOfWeek.SAT.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                       openingPMTimePicker.Time, closingPMTimePicker.Time));
                     break;
                    
             }
@@ -76,9 +91,46 @@ namespace WindowsPhoneApp
             dayOffBox.IsChecked = false;
             if (times==7)
                  {
+                     manager.addDayTime(RegistrationManager.DayOfWeek.SUN.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                            openingPMTimePicker.Time, closingPMTimePicker.Time));
                      Frame.Navigate(typeof(ThirdRegistrationPage));
                  }
                 
+        }
+
+        private async void readCurrentLocation()
+        {
+            Geolocator locator = new Geolocator();
+
+            if (locator.LocationStatus == PositionStatus.Disabled)
+            {
+                MessageDialog msg = new MessageDialog("GPS is not enabled.");
+                await msg.ShowAsync();
+            }
+            else
+            {
+                //position finder via adress
+                Geoposition pos = await locator.GetGeopositionAsync();
+
+                BasicGeoposition queryHint = new BasicGeoposition();
+                queryHint.Latitude = pos.Coordinate.Latitude;
+                queryHint.Longitude = pos.Coordinate.Longitude;
+
+                var result = await MapLocationFinder.FindLocationsAsync(manager.address, new Geopoint(queryHint), 3);
+
+                // Get the coordinates
+                if (result.Status == MapLocationFinderStatus.Success)
+                {
+                    manager.Lat = result.Locations[0].Point.Position.Latitude;
+                    manager.Lng = result.Locations[0].Point.Position.Longitude;
+
+                    /* 
+                    MessageDialog msg = new MessageDialog("Latitude: " + lat + "Longitude: " + lon);
+                    await msg.ShowAsync();
+                    */
+                }
+
+            }
         }
        
     }

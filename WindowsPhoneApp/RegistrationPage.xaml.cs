@@ -47,6 +47,12 @@ namespace WindowsPhoneApp
             }
             else
             {
+                /*Adding data to Registration Manager*/
+                RegistrationManager manager = RegistrationManager.getInstance();
+                manager.LocalName = Name.Text;
+                manager.address = Location.Text;
+                manager.type = TypeBox.Text;
+                manager.description = DescriptionBox.Text;
                 Frame.Navigate(typeof(SecondRegistrationPage));
             }  
         }

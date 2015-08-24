@@ -50,7 +50,7 @@ namespace WindowsPhoneApp
             {
                 msg = new MessageDialog("Thank you for your registration!");
                 await msg.ShowAsync();
-                //if DB saving went ok
+                //if DB saving went ok -- Need to create here DB Connection!!
                 var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
                 localSettings.Values["Username"] = usr.Text;
                 localSettings.Values["Logged"] = true;        
