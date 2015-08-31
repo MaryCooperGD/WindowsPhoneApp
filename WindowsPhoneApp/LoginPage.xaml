@@ -10,11 +10,19 @@
 
     <Grid>
 
+        <TextBlock x:Name="takenID"
+                   Text="ID already taken!"
+                   HorizontalAlignment="Center"
+                   Margin="0,150,0,0"
+                   FontSize="20"
+                   Foreground="RosyBrown"
+                   Visibility="Collapsed"/>
         <TextBox x:Name="UserID"
                  PlaceholderText="User ID"
-                Margin="10,180"
-                 VerticalAlignment="Top"/>
-        <TextBox x:Name="UserPSW"
+                 Margin="10,180"
+                 VerticalAlignment="Top"
+                 />
+        <PasswordBox x:Name="UserPSW"
                  PlaceholderText="Password"
                 Margin="10,250"
                  VerticalAlignment="Top"/>

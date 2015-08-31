@@ -38,8 +38,13 @@ namespace WindowsPhoneApp
 
             if(localSettings.Values["Username"]!= null)
             {
-                wlcmUser.Text = wlcmUser.Text + (String)localSettings.Values["Username"];
+                wlcmUser.Text = wlcmUser.Text + (String)localSettings.Values["Username"]; 
             }
+        }
+
+        private void manageTimeClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(DaysSelection));
         }
     }
 }

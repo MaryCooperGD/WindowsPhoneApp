@@ -9,7 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock FontSize="20"
+        <TextBlock x:Name="registrationVariant"
+            FontSize="20"
                    Margin="10,10,10,0"
                    Opacity="0.7"> 	
             <Run Text="Almost done!"/>
@@ -17,6 +18,15 @@
             <Run Text="Let us know your opening times."/>
             <LineBreak/>
             <Run Text="Be sure to set the times for all of the days."/>
+        </TextBlock>
+        <TextBlock x:Name="modifyVariant"
+            FontSize="20"
+                   Margin="10,10,10,0"
+                   Opacity="0.7"
+                   Text="Modify the opening times for "
+                   TextWrapping="Wrap"
+                   Visibility="Collapsed"> 	
+                   
         </TextBlock>
         <TextBlock x:Name="days"
                  VerticalAlignment="Top"

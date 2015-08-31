@@ -30,6 +30,16 @@ namespace WindowsPhoneApp
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            if (localSettings.Values["Logged"] != null && localSettings.Values["Logged"].Equals(true))
+            {
+                or.Visibility = Visibility.Collapsed;
+                ownerText.Visibility = Visibility.Collapsed;
+                LoginButton.Visibility = Visibility.Collapsed;
+                RegisterButton.Visibility = Visibility.Collapsed;
+                welcomeText.Visibility = Visibility.Visible;
+                ProfileButton.Visibility = Visibility.Visible;
+            }
            // readCurrentLocation();
 
         }

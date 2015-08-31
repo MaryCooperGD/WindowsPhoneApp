@@ -12,18 +12,40 @@
 
         <TextBlock Text="Welcome "
                    FontSize="30"
-                   Margin="10"
+                   Margin="10,10,10,0"
                    Opacity="0.7" 
-                   x:Name="wlcmUser"/>
+                   x:Name="wlcmUser"
+                   Height="50"
+                   VerticalAlignment="Top"/>
         
-        <TextBlock Text="TODO: show informations about the business"
+        <TextBlock Text="Business name"
                    FontSize="20"
-                   Margin="10,60,10,0"
+                   Margin="10,60,10,555"
                    TextWrapping="Wrap"
                    Opacity="0.7"
+                   x:Name="bName"
+                   />
+
+        <TextBlock Text="Business type"
+                   FontSize="20"
+                   Margin="10,90,10,525"
+                   TextWrapping="Wrap"
+                   Opacity="0.7"
+                   x:Name="bType"
+                   />
+
+        <TextBlock Text="Business description"
+                   FontSize="20"
+                   Margin="10,120,10,343"
+                   MaxHeight="223"
+                   TextWrapping="Wrap"
+                   Opacity="0.7"
+                   x:Name="bDesc"
                    />
         <Button Style="{StaticResource Buttons}"
                 Content="Manage opening times"
-                Margin="0,0,150,0"/>
+                Margin="0,30,0,0"
+                HorizontalAlignment="Center"
+                Click="manageTimeClick"/>
     </Grid>
 </Page>

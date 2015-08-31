@@ -28,6 +28,8 @@ namespace WindowsPhoneApp
         List<String> daysList = new List<String>();
         int times;
         private RegistrationManager manager = RegistrationManager.getInstance();
+        private String dayToModify;
+        private bool modifying;
         
         public SecondRegistrationPage()
         {
@@ -43,6 +45,17 @@ namespace WindowsPhoneApp
         {        
             times = 0;
             days.Text = "Monday";
+            if (e.Parameter !=null)
+            {
+                dayToModify = (String)e.Parameter;
+                modifying = true;
+                days.Text = dayToModify;
+                registrationVariant.Visibility = Visibility.Collapsed;
+                modifyVariant.Visibility = Visibility.Visible;
+                modifyVariant.Text = modifyVariant.Text + dayToModify;
+            }
+           
+            
         }
 
         private async void DayOff_Checked(object sender, RoutedEventArgs e)
@@ -53,48 +66,57 @@ namespace WindowsPhoneApp
 
         private void times_submitted(object sender, RoutedEventArgs e)
         {
-            switch(times)
+            if (modifying)
             {
-                case 0:
-                    days.Text = "Tuesday";
-                    manager.addDayTime(RegistrationManager.DayOfWeek.MON.ToString(), new DayTimespan(openingAMTimePicker.Time,closingAMTimePicker.Time,
-                        openingPMTimePicker.Time,closingPMTimePicker.Time));
-                    break;
-                case 1:
-                    days.Text = "Wednesday";
-                    manager.addDayTime(RegistrationManager.DayOfWeek.TUE.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                       openingPMTimePicker.Time, closingPMTimePicker.Time));
-                    break;
-                case 2:
-                    days.Text = "Thursday";
-                    manager.addDayTime(RegistrationManager.DayOfWeek.WED.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                       openingPMTimePicker.Time, closingPMTimePicker.Time));
-                    break;
-                case 3:
-                    days.Text = "Friday";
-                    manager.addDayTime(RegistrationManager.DayOfWeek.THU.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                       openingPMTimePicker.Time, closingPMTimePicker.Time));
-                    break;
-                case 4:
-                    days.Text = "Saturday";
-                    manager.addDayTime(RegistrationManager.DayOfWeek.FRI.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                       openingPMTimePicker.Time, closingPMTimePicker.Time));
-                    break;
-                case 5:
-                    days.Text = "Sunday";
-                    manager.addDayTime(RegistrationManager.DayOfWeek.SAT.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                       openingPMTimePicker.Time, closingPMTimePicker.Time));
-                    break;
-                   
+                //TODO submit: save modified data on db
+                Frame.GoBack();
             }
-            times++;
-            dayOffBox.IsChecked = false;
-            if (times==7)
-                 {
-                     manager.addDayTime(RegistrationManager.DayOfWeek.SUN.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+            else if (!modifying)
+            {
+                switch (times)
+                {
+                    case 0:
+                        days.Text = "Tuesday";
+                        manager.addDayTime(RegistrationManager.DayOfWeek.MON.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
                             openingPMTimePicker.Time, closingPMTimePicker.Time));
-                     Frame.Navigate(typeof(ThirdRegistrationPage));
-                 }
+                        break;
+                    case 1:
+                        days.Text = "Wednesday";
+                        manager.addDayTime(RegistrationManager.DayOfWeek.TUE.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                        break;
+                    case 2:
+                        days.Text = "Thursday";
+                        manager.addDayTime(RegistrationManager.DayOfWeek.WED.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                        break;
+                    case 3:
+                        days.Text = "Friday";
+                        manager.addDayTime(RegistrationManager.DayOfWeek.THU.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                        break;
+                    case 4:
+                        days.Text = "Saturday";
+                        manager.addDayTime(RegistrationManager.DayOfWeek.FRI.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                        break;
+                    case 5:
+                        days.Text = "Sunday";
+                        manager.addDayTime(RegistrationManager.DayOfWeek.SAT.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                        break;
+
+                }
+                times++;
+                dayOffBox.IsChecked = false;
+                if (times == 7)
+                {
+                    manager.addDayTime(RegistrationManager.DayOfWeek.SUN.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                    Frame.Navigate(typeof(ThirdRegistrationPage));
+                }
+            }
+            
                 
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -36,9 +37,24 @@ namespace WindowsPhoneApp
         {
         }
 
-        private void enter_login(object sender, RoutedEventArgs e)
+        private async void enter_login(object sender, RoutedEventArgs e)
         {
-            //check db information
+            //TODO: controllo se esiste già l'ID e in caso bisogna mettere takenID.visibility=visible e non navigare verso un'altra pagina
+            if (string.IsNullOrEmpty(UserID.Text) || string.IsNullOrEmpty(UserPSW.Password))
+            {
+                MessageDialog msg = new MessageDialog("Please, fill all the fields.");
+                await msg.ShowAsync();
+            }
+            else
+            {
+                //TODO check db information + salva username nelle local settings
+                var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                localSettings.Values["Username"] = UserID.Text;
+                localSettings.Values["Logged"] = true;
+                Frame.Navigate(typeof(ProfilePage));
+                Frame.BackStack.RemoveAt(Frame.BackStack.Count() - 1);
+            }
+            
         }
     }
 }

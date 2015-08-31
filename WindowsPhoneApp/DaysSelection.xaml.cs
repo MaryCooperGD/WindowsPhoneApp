@@ -21,9 +21,9 @@ namespace WindowsPhoneApp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ThirdRegistrationPage : Page
+    public sealed partial class DaysSelection : Page
     {
-        public ThirdRegistrationPage()
+        public DaysSelection()
         {
             this.InitializeComponent();
         }
@@ -35,30 +35,14 @@ namespace WindowsPhoneApp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
         }
 
-        private async void submit_final(object sender, RoutedEventArgs e)
+        private void daySelected(object sender, TappedRoutedEventArgs e)
         {
-            MessageDialog msg;
-            if(string.IsNullOrEmpty(usr.Text) || string.IsNullOrEmpty(psw.Password))
-            {
-               msg  = new MessageDialog("Please, fill all the fields!");
-                await msg.ShowAsync();
-            }
-            else
-            {
-                msg = new MessageDialog("Thank you for your registration!");
-                await msg.ShowAsync();
-                //if DB saving went ok -- Need to create here DB Connection!!
-
-                //RIFARE! username e password son da salvare sul db + salva manager con tutte le altre informazioni
-               /* var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-                localSettings.Values["Username"] = usr.Text;
-                localSettings.Values["Logged"] = true;        */
-                Frame.Navigate(typeof(MainPage));
-                Frame.BackStack.Clear();  
-            }
+            TextBlock day = (TextBlock)sender ;
+            String dayS = day.Text;
+            Frame.Navigate(typeof(SecondRegistrationPage), dayS);
+            Frame.BackStack.RemoveAt(Frame.BackStack.Count() - 1);
         }
     }
 }
