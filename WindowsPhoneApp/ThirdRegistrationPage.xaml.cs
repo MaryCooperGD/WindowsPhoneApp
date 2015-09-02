@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Parse;
+using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -48,16 +50,53 @@ namespace WindowsPhoneApp
             }
             else
             {
-                msg = new MessageDialog("Thank you for your registration!");
-                await msg.ShowAsync();
+                RegistrationManager.getInstance().username = usr.Text;
+                RegistrationManager.getInstance().password = psw.Password;
                 //if DB saving went ok -- Need to create here DB Connection!!
 
                 //RIFARE! username e password son da salvare sul db + salva manager con tutte le altre informazioni
                /* var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
                 localSettings.Values["Username"] = usr.Text;
                 localSettings.Values["Logged"] = true;        */
-                Frame.Navigate(typeof(MainPage));
-                Frame.BackStack.Clear();  
+
+                //prima controllo se non c'è gia quell'username!
+                var query = from account in ParseObject.GetQuery(RegistrationManager.ParseName)
+                            where account.Get<string>("username") == usr.Text
+                            select account;
+                IEnumerable<ParseObject> results = await query.FindAsync();
+
+                if (results.Count() != 0)
+                {
+                    msg = new MessageDialog("Account already exists, please select another username.");
+                    usr.Text = "";
+                    psw.Password = "";
+                    await msg.ShowAsync();
+                }
+                else
+                {
+                    //msg = new MessageDialog("Thank you for your registration!");
+                    //await msg.ShowAsync();
+
+                    try
+                    {
+                        ParseObject obj = RegistrationManager.getInstance().getParseObject();
+                        await obj.SaveAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message); //qui accade l'exception, unable to encode DayTimespan
+                        //probabilmente dovuto al fatto che Parse lavora solo con alcuni tipi di dato.
+                        //Necessario trovare un modo per Codificare i Timespan in ParseObjects(Leggere guida)
+                        
+                    }
+
+                    Frame.Navigate(typeof(MainPage));
+                    Frame.BackStack.Clear(); 
+                }
+
+
+
+                 
             }
         }
     }

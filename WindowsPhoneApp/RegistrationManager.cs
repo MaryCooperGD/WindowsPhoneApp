@@ -80,7 +80,7 @@ namespace WindowsPhoneApp
         /*Turns the registration manager instance into a new Parse object to save into the database*/
         public ParseObject getParseObject()
         {
-            var obj = new ParseObject(RegistrationManager.ParseName);
+            ParseObject obj = new ParseObject(RegistrationManager.ParseName);
             obj["username"] = username;
             obj["password"] = password;
             obj["localname"] = LocalName;
@@ -92,6 +92,19 @@ namespace WindowsPhoneApp
             obj["dictionary"] = daytime;
 
             return obj;
+        }
+
+        public void reset(ParseObject account)
+        {
+            username = account.Get<string>("username");
+            password = account.Get<string>("password");
+            LocalName = account.Get<string>("localname");
+            type = account.Get<string>("type");
+            description = account.Get<string>("description");
+            address = account.Get<string>("address");
+            Lat = account.Get<double>("lat");
+            Lng = account.Get<double>("lng");
+            replaceDictionary(account.Get<IDictionary<string, DayTimespan>>("dictionary"));
         }
 
         

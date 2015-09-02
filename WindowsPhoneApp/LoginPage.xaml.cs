@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Parse;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -47,12 +48,46 @@ namespace WindowsPhoneApp
             }
             else
             {
-                //TODO check db information + salva username nelle local settings
-                var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-                localSettings.Values["Username"] = UserID.Text;
-                localSettings.Values["Logged"] = true;
-                Frame.Navigate(typeof(ProfilePage));
-                Frame.BackStack.RemoveAt(Frame.BackStack.Count() - 1);
+                
+
+                var query = from account in ParseObject.GetQuery(RegistrationManager.ParseName)
+                            where account.Get<string>("username") == UserID.Text
+                            select account;
+                IEnumerable<ParseObject> results = await query.FindAsync();
+
+                if (results.Count() != 0)
+                {
+                    
+
+                    ParseObject account = results.ElementAt(0);
+
+                    if(account.Get<string>("username") != UserID.Text ||
+                        (account.Get<string>("username") == UserID.Text && account.Get<string>("password") != UserPSW.Password))
+                    {
+                        MessageDialog msg = new MessageDialog("Incorrect Username or password.");
+                        await msg.ShowAsync();
+                    }
+                    else 
+                    {
+                        RegistrationManager manager = RegistrationManager.getInstance();
+                        manager.reset(account);
+                        var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                        localSettings.Values["Username"] = manager.username;
+                        localSettings.Values["Logged"] = true;
+
+                        Frame.Navigate(typeof(ProfilePage));
+                        Frame.BackStack.RemoveAt(Frame.BackStack.Count() - 1);
+                    }
+
+                    
+                }
+                else
+                {
+                    MessageDialog msg = new MessageDialog("No username found.");
+                    await msg.ShowAsync();
+                }
+
+                
             }
             
         }
