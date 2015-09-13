@@ -167,6 +167,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Parse">
       <HintPath>..\packages\Parse.1.5.4\lib\wpa81\Parse.dll</HintPath>
     </Reference>

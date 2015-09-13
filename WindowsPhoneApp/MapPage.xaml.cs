@@ -75,23 +75,41 @@ namespace WindowsPhoneApp
                     startPositionChangeListener(locator);
                 });
 
-                //position finder via adress
+                
+                
+                //position finder via adress for db
                 Geoposition pos = await locator.GetGeopositionAsync();
 
                 BasicGeoposition queryHint = new BasicGeoposition();
                 queryHint.Latitude = pos.Coordinate.Latitude;
                 queryHint.Longitude = pos.Coordinate.Longitude;
 
-                var result = await MapLocationFinder.FindLocationsAsync("Via busseto 15, Riccione", new Geopoint(queryHint), 3);
+                var result = await MapLocationFinder.FindLocationsAsync("Via Santo Stefano 21, Trecastelli", new Geopoint(queryHint), 3);
 
                 // Get the coordinates
                 if (result.Status == MapLocationFinderStatus.Success)
                 {
+                    MapIcon icon2 = new MapIcon()
+                    {
+
+                    };
+                    icon2.Title = "food";
+
                     double lat = result.Locations[0].Point.Position.Latitude;
                     double lon = result.Locations[0].Point.Position.Longitude;
 
-                    MessageDialog msg = new MessageDialog("Latitude: " + lat + "Longitude: " + lon);
-                    await msg.ShowAsync();
+                    icon2.Location = new Geopoint(new BasicGeoposition()
+                    {
+                        Latitude = lat,
+                        Longitude = lon
+                    });
+                    myMapControl.MapElements.Add(icon2);
+                    
+                    
+                  
+
+                   // MessageDialog msg = new MessageDialog("Latitude: " + lat + "Longitude: " + lon);
+                    //await msg.ShowAsync();
                 }
 
             }

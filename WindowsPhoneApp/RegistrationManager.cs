@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Parse;
+using System.IO;
+using System.Runtime.Serialization.Json;
+
 
 namespace WindowsPhoneApp
 {
@@ -31,7 +34,7 @@ namespace WindowsPhoneApp
 
         /*At first there was no string in the key field. Actually it is reqired to 
          save the dictionary correctly into PARSE */
-        private IDictionary<string, DayTimespan> daytime = new Dictionary<string,DayTimespan>();
+        private IDictionary<string, string> daytime = new Dictionary<string,string>();
 
         /*Private, singleton pattern*/
         private RegistrationManager() { }
@@ -49,7 +52,11 @@ namespace WindowsPhoneApp
                 return false;
             }
 
-            daytime.Add(day, time);
+            //Json Serialization
+
+            string obj = Newtonsoft.Json.JsonConvert.SerializeObject(time);
+
+            daytime.Add(day, obj);
             return true;
 
         }
@@ -60,19 +67,22 @@ namespace WindowsPhoneApp
             if (daytime.ContainsKey(day))
             {
                 daytime.Remove(day);
-                daytime.Add(day, time);
+
+                //usare serializzazione json
+                string obj = Newtonsoft.Json.JsonConvert.SerializeObject(time);
+                daytime.Add(day, obj);
                 return true;
             }
             return false;
         }
 
-        public void replaceDictionary(IDictionary<string, DayTimespan> dictionary)
+        public void replaceDictionary(IDictionary<string, string> dictionary)
         {
             this.daytime = dictionary;
         }
 
         /*could be implemented in a safer way, but for university purpose it is enogh*/
-        public IDictionary<string, DayTimespan> getDictionary()
+        public IDictionary<string, string> getDictionary()
         {
             return this.daytime;
         }
@@ -104,7 +114,7 @@ namespace WindowsPhoneApp
             address = account.Get<string>("address");
             Lat = account.Get<double>("lat");
             Lng = account.Get<double>("lng");
-            replaceDictionary(account.Get<IDictionary<string, DayTimespan>>("dictionary"));
+            replaceDictionary(account.Get<IDictionary<string, string>>("dictionary"));
         }
 
         
