@@ -15,6 +15,7 @@ namespace WindowsPhoneApp
         private static RegistrationManager manager = new RegistrationManager();
 
         public static readonly string ParseName = "account";
+        public static readonly string Version = "1";
 
         public enum DayOfWeek
         {
@@ -31,6 +32,8 @@ namespace WindowsPhoneApp
         public string description { get; set; }
         public double Lat { get; set; }
         public double Lng { get; set; }
+
+        public ParseObject currAccount { get; set; }
 
         /*At first there was no string in the key field. Actually it is reqired to 
          save the dictionary correctly into PARSE */
@@ -115,6 +118,7 @@ namespace WindowsPhoneApp
             Lat = account.Get<double>("lat");
             Lng = account.Get<double>("lng");
             replaceDictionary(account.Get<IDictionary<string, string>>("dictionary"));
+            currAccount = account;
         }
 
         

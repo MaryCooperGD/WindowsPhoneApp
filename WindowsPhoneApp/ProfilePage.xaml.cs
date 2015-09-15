@@ -40,6 +40,11 @@ namespace WindowsPhoneApp
             {
                 wlcmUser.Text = wlcmUser.Text + (String)localSettings.Values["Username"]; 
             }
+
+            //TODO settare i campi
+            bName.Text = RegistrationManager.getInstance().LocalName;
+            bType.Text = RegistrationManager.getInstance().type;
+            bDesc.Text = RegistrationManager.getInstance().description;
         }
 
         private void manageTimeClick(object sender, RoutedEventArgs e)

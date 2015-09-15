@@ -30,6 +30,7 @@ namespace WindowsPhoneApp
         private RegistrationManager manager = RegistrationManager.getInstance();
         private String dayToModify;
         private bool modifying;
+        private bool mChecked;
         
         public SecondRegistrationPage()
         {
@@ -43,7 +44,7 @@ namespace WindowsPhoneApp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            readCurrentLocation();
+            
             times = 0;
             days.Text = "Monday";
             if (e.Parameter !=null)
@@ -63,48 +64,81 @@ namespace WindowsPhoneApp
         {
             MessageDialog msg = new MessageDialog("This is your day off");
             await msg.ShowAsync();
+            mChecked = true;
+        }
+
+        private async void saveModify(RegistrationManager.DayOfWeek dayOfWeek)
+        {
+            RegistrationManager.getInstance().changeDayTime(dayOfWeek.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                            openingPMTimePicker.Time, closingPMTimePicker.Time, mChecked));
+            await RegistrationManager.getInstance().getParseObject().SaveAsync();
         }
 
         private void times_submitted(object sender, RoutedEventArgs e)
         {
             if (modifying)
             {
-                //TODO submit: save modified data on db
+                switch (dayToModify)
+                {
+                    case "Monday":
+                        saveModify(RegistrationManager.DayOfWeek.MON);
+                        break;
+                    case "Tuesday":
+                        saveModify(RegistrationManager.DayOfWeek.TUE);
+                        break;
+                    case "Wednesday":
+                        saveModify(RegistrationManager.DayOfWeek.WED);
+                        break;
+                    case "Thursday":
+                        saveModify(RegistrationManager.DayOfWeek.THU);
+                        break;
+                    case "Friday":
+                        saveModify(RegistrationManager.DayOfWeek.FRI);
+                        break;
+                    case "Saturday":
+                        saveModify(RegistrationManager.DayOfWeek.SAT);
+                        break;
+                    case "Sunday":
+                        saveModify(RegistrationManager.DayOfWeek.SUN);
+                        break;
+                }
                 Frame.GoBack();
             }
             else if (!modifying)
             {
+                readCurrentLocation();
+
                 switch (times)
                 {
                     case 0:
                         days.Text = "Tuesday";
                         manager.addDayTime(RegistrationManager.DayOfWeek.MON.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                            openingPMTimePicker.Time, closingPMTimePicker.Time));
+                            openingPMTimePicker.Time, closingPMTimePicker.Time,mChecked));
                         break;
                     case 1:
                         days.Text = "Wednesday";
                         manager.addDayTime(RegistrationManager.DayOfWeek.TUE.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                           openingPMTimePicker.Time, closingPMTimePicker.Time,mChecked));
                         break;
                     case 2:
                         days.Text = "Thursday";
                         manager.addDayTime(RegistrationManager.DayOfWeek.WED.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                           openingPMTimePicker.Time, closingPMTimePicker.Time,mChecked));
                         break;
                     case 3:
                         days.Text = "Friday";
                         manager.addDayTime(RegistrationManager.DayOfWeek.THU.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                           openingPMTimePicker.Time, closingPMTimePicker.Time,mChecked));
                         break;
                     case 4:
                         days.Text = "Saturday";
                         manager.addDayTime(RegistrationManager.DayOfWeek.FRI.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                           openingPMTimePicker.Time, closingPMTimePicker.Time,mChecked));
                         break;
                     case 5:
                         days.Text = "Sunday";
                         manager.addDayTime(RegistrationManager.DayOfWeek.SAT.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                           openingPMTimePicker.Time, closingPMTimePicker.Time,mChecked));
                         break;
 
                 }
@@ -113,7 +147,7 @@ namespace WindowsPhoneApp
                 if (times == 7)
                 {
                     manager.addDayTime(RegistrationManager.DayOfWeek.SUN.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
-                           openingPMTimePicker.Time, closingPMTimePicker.Time));
+                           openingPMTimePicker.Time, closingPMTimePicker.Time,mChecked));
                     Frame.Navigate(typeof(ThirdRegistrationPage));
                 }
             }

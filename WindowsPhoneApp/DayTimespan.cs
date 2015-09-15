@@ -8,8 +8,9 @@ namespace WindowsPhoneApp
 {
     public class DayTimespan
     {
-        public DayTimespan(TimeSpan morningBeginning, TimeSpan morningEnding, TimeSpan afternoonBeginning, TimeSpan afternoonEnding)
+        public DayTimespan(TimeSpan morningBeginning, TimeSpan morningEnding, TimeSpan afternoonBeginning, TimeSpan afternoonEnding, bool free)
         {
+            this.isFree = free;
             this.MorningBeginningTimespan = morningBeginning;
             this.MorningEndingTimespan = morningEnding;
             this.AfternoonBeginningTimespan = afternoonBeginning;
@@ -22,5 +23,7 @@ namespace WindowsPhoneApp
         public TimeSpan AfternoonBeginningTimespan { get; set; }
 
         public TimeSpan AfternoonEndingTimespan { get; set; }
+
+        public bool isFree { get; set; }
     }
 }
