@@ -56,6 +56,10 @@ namespace WindowsPhoneApp
                 modifyVariant.Visibility = Visibility.Visible;
                 modifyVariant.Text = modifyVariant.Text + dayToModify;
             }
+            else
+            {
+               readCurrentLocation();
+            }
            
             
         }
@@ -106,7 +110,7 @@ namespace WindowsPhoneApp
             }
             else if (!modifying)
             {
-                readCurrentLocation();
+                
 
                 switch (times)
                 {
@@ -178,13 +182,19 @@ namespace WindowsPhoneApp
                 // Get the coordinates
                 if (result.Status == MapLocationFinderStatus.Success)
                 {
-                    manager.Lat = result.Locations[0].Point.Position.Latitude;
-                    manager.Lng = result.Locations[0].Point.Position.Longitude;
+                    try
+                    {
+                        manager.Lat = result.Locations[0].Point.Position.Latitude;
+                        manager.Lng = result.Locations[0].Point.Position.Longitude;
 
-                    /* 
-                    MessageDialog msg = new MessageDialog("Latitude: " + lat + "Longitude: " + lon);
-                    await msg.ShowAsync();
-                    */
+
+                        MessageDialog msg = new MessageDialog("Latitude: " + manager.Lat + "Longitude: " + manager.Lng);
+                        await msg.ShowAsync();
+                    }
+                    catch (Exception e)
+                    {
+                        System.Diagnostics.Debug.WriteLine("hueeeee");
+                    }
                 }
 
             }

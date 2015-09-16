@@ -18,6 +18,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Core;
 using Windows.Services.Maps;
+using Parse;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -26,8 +27,14 @@ namespace WindowsPhoneApp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+    /// 
+
     public sealed partial class MapPage : Page
     {
+
+        private Geoposition pos = null;
+        private int distance = 1;
+
         public MapPage()
         {
             this.InitializeComponent();
@@ -55,6 +62,9 @@ namespace WindowsPhoneApp
             else
             {
                 Geoposition position = await locator.GetGeopositionAsync();
+                pos = position;
+
+                buildMap();
 
                 myMapControl.ZoomLevel = 12;
                 myMapControl.LandmarksVisible = true;
@@ -75,7 +85,9 @@ namespace WindowsPhoneApp
                     startPositionChangeListener(locator);
                 });
 
-                
+
+
+                /*
                 
                 //position finder via adress for db
                 Geoposition pos = await locator.GetGeopositionAsync();
@@ -105,13 +117,11 @@ namespace WindowsPhoneApp
                     });
                     myMapControl.MapElements.Add(icon2);
                     
-                    
-                  
 
                    // MessageDialog msg = new MessageDialog("Latitude: " + lat + "Longitude: " + lon);
                     //await msg.ShowAsync();
                 }
-
+                */
             }
         }
 
@@ -126,8 +136,72 @@ namespace WindowsPhoneApp
         {
             
             int value = (int)e.NewValue;
+            distance = value;
             MessageDialog msg = new MessageDialog("Range of " +value+" km.");
             await msg.ShowAsync();
-        }        
+            buildMap();
+        }
+
+        private async void buildMap()
+        {
+            if(pos == null)
+                return;
+
+
+            myMapControl.MapElements.Clear();
+            try
+            {
+                //per il momento nessun check sull'ora
+                var query = from places in ParseObject.GetQuery(RegistrationManager.ParseName)
+                            where places.Get<double>("lat") != 0
+                            select places;
+                IEnumerable<ParseObject> results = await query.FindAsync();
+
+                
+
+                foreach (ParseObject obj in results)
+                {
+                    
+                    if (DistanceTo(obj.Get<double>("lat"), obj.Get<double>("lng"), pos.Coordinate.Latitude, pos.Coordinate.Longitude) < distance)
+                    {
+                        MapIcon icon = new MapIcon() { };
+                        RegistrationManager.getInstance().reset(obj);
+                        icon.Title = RegistrationManager.getInstance().LocalName;
+                        icon.Location = new Geopoint(new BasicGeoposition()
+                        {
+                            Latitude = RegistrationManager.getInstance().Lat,
+                            Longitude = RegistrationManager.getInstance().Lng
+                        });
+                        myMapControl.MapElements.Add(icon);
+                    }
+
+                    
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+
+        }
+
+        public double DistanceTo(double lat1, double lon1, double lat2, double lon2)
+        {
+            double rlat1 = Math.PI * lat1 / 180;
+            double rlat2 = Math.PI * lat2 / 180;
+            double theta = lon1 - lon2;
+            double rtheta = Math.PI * theta / 180;
+            double dist =
+                Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
+                Math.Cos(rlat2) * Math.Cos(rtheta);
+            dist = Math.Acos(dist);
+            dist = dist * 180 / Math.PI;
+            dist = dist * 60 * 1.1515;
+
+           
+           return dist * 1.609344;
+
+        }
+
     }
 }
