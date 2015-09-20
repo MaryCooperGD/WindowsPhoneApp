@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Windows.Phone.UI.Input;
 using Parse;
+using Windows.UI.Popups;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -100,8 +101,8 @@ namespace WindowsPhoneApp
                     throw new Exception("Failed to create initial page");
                 }
             }
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            localSettings.Values["Logged"] = false;
+           // var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            //localSettings.Values["Logged"] = false;
             // Ensure the current window is active
             Window.Current.Activate();
         }
@@ -128,10 +129,14 @@ namespace WindowsPhoneApp
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["Logged"] = false;
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+       
+        
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
@@ -148,6 +153,8 @@ namespace WindowsPhoneApp
                 e.Handled = true;
             }   
         }
+
+       
 
         
     }
