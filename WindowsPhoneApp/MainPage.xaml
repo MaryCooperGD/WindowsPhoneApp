@@ -8,14 +8,16 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Style="{StaticResource Background}">
         <TextBlock Text="STREET FOOD"
                    FontSize="40" Margin="10,33,10,0"
-                   VerticalAlignment="Top"/>
+                   VerticalAlignment="Top"
+                   Style="{StaticResource TextColor}"/>
 
         <TextBlock Margin="10,130,10,0" FontSize="20"
                    TextWrapping="Wrap"
-                   VerticalAlignment="Top">
+                   VerticalAlignment="Top"
+                   Style="{StaticResource TextColor}">
         <Run Text="Are you hungry and you don't know where to eat?"/>
             <LineBreak/>
             <Run Text="Street food will find for you the nearest open places for you."/>
@@ -36,7 +38,8 @@
                    FontSize="16"
                    HorizontalAlignment="Center"
                    Margin="10,0,0,130" Opacity="0.6"
-                   x:Name="ownerText"/>
+                   x:Name="ownerText"
+                   Style="{StaticResource TextColor}"/>
         
         <Button x:Name="LoginButton"
             Content="Login" Opacity="0.6"
@@ -50,14 +53,16 @@
                 VerticalAlignment="Bottom"
                 Margin="200,0,0,60"
                 Style="{StaticResource Buttons}"
-                Click="RegisterButton_Pressed"/>
+                Click="RegisterButton_Pressed"
+                />
         <TextBlock Text="or"
                    VerticalAlignment="Bottom"
                    FontSize="16"
                    Opacity="0.6"
                    HorizontalAlignment="Center"
                    Margin="0,0,0,80"
-                   x:Name="or"/>
+                   x:Name="or"
+                   Style="{StaticResource TextColor}"/>
         
         <TextBlock Text="Welcome"
                    VerticalAlignment="Bottom"
@@ -65,7 +70,8 @@
                    HorizontalAlignment="Left"
                    Margin="10,0,0,130" Opacity="0.6"
                    x:Name="welcomeText"
-                   Visibility="Collapsed"/>
+                   Visibility="Collapsed"
+                   Style="{StaticResource TextColor}"/>
 
         <Button x:Name="ProfileButton"
             Content="Manage your business" Opacity="0.6"

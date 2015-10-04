@@ -9,9 +9,20 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="MyDictionary.xaml"/> 
             </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="ApplicationPageForegroundThemeBrush" Color="Black"/>
+            <SolidColorBrush x:Key="ButtonBackgroundThemeBrush" Color="#00B6B6B6" />
+            <SolidColorBrush x:Key="ButtonBorderThemeBrush" Color="#00000000" />
+            <SolidColorBrush x:Key="ButtonDisabledBackgroundThemeBrush" Color="#00CACACA" />
+            <SolidColorBrush x:Key="ButtonDisabledBorderThemeBrush" Color="#00000000" />
+            <SolidColorBrush x:Key="ButtonDisabledForegroundThemeBrush" Color="#FF000000" />
+            <SolidColorBrush x:Key="ButtonPointerOverBackgroundThemeBrush" Color="#00CDCDCD" />
+            <SolidColorBrush x:Key="ButtonPointerOverForegroundThemeBrush" Color="#FF000000" />
+            <SolidColorBrush x:Key="ButtonPressedBackgroundThemeBrush" Color="#00000000" />
+            <SolidColorBrush x:Key="ButtonPressedForegroundThemeBrush" Color="#FFFFFFFF" />
         </ResourceDictionary>
-    </Application.Resources>
 
-    
+    </Application.Resources>
+   
+
 
 </Application>

@@ -8,15 +8,17 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Style="{StaticResource Background}">
         <TextBox x:Name="Name"
                  PlaceholderText="Business name"
                  Margin="10,53,10,0"
-                 HorizontalAlignment="Stretch"/>
+                 HorizontalAlignment="Stretch"
+                 Style="{StaticResource TextColorBox}"/>
         <TextBox x:Name="Location"
                  PlaceholderText="Street, Number, Province,State/Region"
                  Margin="10,117,10,0"
-                 HorizontalAlignment="Stretch"/>
+                 HorizontalAlignment="Stretch"
+                 Style="{StaticResource TextColorBox}"/>
 
         <Button x:Name="submitRegistrationButton"
                 Style="{StaticResource Buttons}"
@@ -28,12 +30,14 @@
                  Margin="10,186,10,0" 
                  PlaceholderText="Business type (Steak house, restaurant,fast food, grocery...)" 
                  TextWrapping="Wrap"
-                 Height="40"/>
+                 Height="40"
+                 Style="{StaticResource TextColorBox}"/>
         <TextBox x:Name="DescriptionBox"
             HorizontalAlignment="Stretch" 
                  Margin="10,290,10,0"    
                  TextWrapping="Wrap"
                  PlaceholderText="Business description" Height="122" 
+                 Style="{StaticResource TextColorBox}"
                  />
 
 

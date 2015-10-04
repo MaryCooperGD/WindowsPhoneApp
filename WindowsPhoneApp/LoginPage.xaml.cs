@@ -40,6 +40,8 @@ namespace WindowsPhoneApp
 
         private async void enter_login(object sender, RoutedEventArgs e)
         {
+
+            
             //TODO: controllo se esiste già l'ID e in caso bisogna mettere takenID.visibility=visible e non navigare verso un'altra pagina
             if (string.IsNullOrEmpty(UserID.Text) || string.IsNullOrEmpty(UserPSW.Password))
             {
@@ -71,6 +73,8 @@ namespace WindowsPhoneApp
                     {
                         RegistrationManager manager = RegistrationManager.getInstance();
                         manager.reset(account);
+                        //set manually the parse account;
+                        manager.currAccount = account;
                         var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
                         localSettings.Values["Username"] = manager.username;
                         localSettings.Values["Logged"] = true;

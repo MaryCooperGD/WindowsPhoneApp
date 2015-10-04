@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Style="{StaticResource Background}">
 
         <TextBlock x:Name="takenID"
                    Text="ID already taken!"
@@ -16,16 +16,19 @@
                    Margin="0,150,0,0"
                    FontSize="20"
                    Foreground="RosyBrown"
-                   Visibility="Collapsed"/>
+                   Visibility="Collapsed"
+                   Style="{StaticResource TextColor}"/>
         <TextBox x:Name="UserID"
                  PlaceholderText="User ID"
                  Margin="10,180"
                  VerticalAlignment="Top"
+                 Style="{StaticResource TextColorBox}"
                  />
         <PasswordBox x:Name="UserPSW"
                  PlaceholderText="Password"
                 Margin="10,250"
-                 VerticalAlignment="Top"/>
+                 VerticalAlignment="Top"
+                     Foreground="Black"/>
         
         <Button x:Name="enterLoginButton"
                 Content="Enter"

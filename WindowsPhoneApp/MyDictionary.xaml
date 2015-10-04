@@ -6,11 +6,29 @@
     <Style TargetType="Button" x:Key="Buttons">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
 
+    <Style x:Key="Background" TargetType="Grid">
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush ImageSource="/Assets/pattern612_jpg.jpg"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TextColor" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <Style x:Key="TextColorBox" TargetType="TextBox">
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+    
     <Style TargetType="TextBlock" x:Key="daysSelection">
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
 </ResourceDictionary>

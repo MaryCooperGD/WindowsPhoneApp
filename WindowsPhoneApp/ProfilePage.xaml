@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Style="{StaticResource Background}">
 
         <TextBlock Text="Welcome "
                    FontSize="30"
@@ -16,7 +16,8 @@
                    Opacity="0.7" 
                    x:Name="wlcmUser"
                    Height="50"
-                   VerticalAlignment="Top"/>
+                   VerticalAlignment="Top"
+                   Style="{StaticResource TextColor}"/>
         
         <TextBlock Text="Business name"
                    FontSize="20"
@@ -24,6 +25,7 @@
                    TextWrapping="Wrap"
                    Opacity="0.7"
                    x:Name="bName"
+                   Style="{StaticResource TextColor}"
                    />
 
         <TextBlock Text="Business type"
@@ -32,6 +34,7 @@
                    TextWrapping="Wrap"
                    Opacity="0.7"
                    x:Name="bType"
+                   Style="{StaticResource TextColor}"
                    />
 
         <TextBlock Text="Business description"
@@ -41,6 +44,7 @@
                    TextWrapping="Wrap"
                    Opacity="0.7"
                    x:Name="bDesc"
+                   Style="{StaticResource TextColor}"
                    />
         <Button Style="{StaticResource Buttons}"
                 Content="Manage opening times"

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Parse;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -73,6 +74,25 @@ namespace WindowsPhoneApp
 
         private async void saveModify(RegistrationManager.DayOfWeek dayOfWeek)
         {
+            //l'errore risiede nel fatto che va modificato il parse object, non il reg manager! Altrimenti nasce una nuova copia i oggetto!
+
+            DayTimespan newspan = new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
+                            openingPMTimePicker.Time, closingPMTimePicker.Time, mChecked);
+
+            ParseObject account = RegistrationManager.getInstance().currAccount;
+
+            IDictionary<string, string> dict = account.Get<IDictionary<string, string>>("dictionary");
+
+            if (dict.ContainsKey(dayOfWeek.ToString()))
+            {
+                dict.Remove(dayOfWeek.ToString());
+                string obj = Newtonsoft.Json.JsonConvert.SerializeObject(newspan);
+                dict.Add(dayOfWeek.ToString(), obj);
+                account["dictionary"] = dict;
+                await account.SaveAsync();
+                return;
+            }
+
             RegistrationManager.getInstance().changeDayTime(dayOfWeek.ToString(), new DayTimespan(openingAMTimePicker.Time, closingAMTimePicker.Time,
                             openingPMTimePicker.Time, closingPMTimePicker.Time, mChecked));
             await RegistrationManager.getInstance().getParseObject().SaveAsync();

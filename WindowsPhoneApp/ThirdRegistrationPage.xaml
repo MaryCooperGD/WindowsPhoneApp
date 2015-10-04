@@ -8,21 +8,24 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Style="{StaticResource Background}">
 
         <TextBlock Text="Just one last step!"
                    FontSize="30"
                    Margin="10"
                    Opacity="0.7"
+                   Style="{StaticResource TextColor}"
                    />
         <TextBox
             x:Name="usr"
             PlaceholderText="Username"
             Margin="10,200,10,0"
+            Style="{StaticResource TextColorBox}"
             />
         <PasswordBox PlaceholderText="Password"
                      Margin="10,300,10,0"
-                     x:Name="psw"/>
+                     x:Name="psw"
+                     Foreground="Black"/>
         <Button x:Name="submitUserPass"
                 Click="submit_final"
                 VerticalAlignment="Bottom"

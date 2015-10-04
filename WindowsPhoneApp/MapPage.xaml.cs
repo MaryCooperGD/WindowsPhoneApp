@@ -34,6 +34,7 @@ namespace WindowsPhoneApp
 
         private Geoposition pos = null;
         private int distance = 1;
+        private MapIcon currentLocation;
 
         public MapPage()
         {
@@ -76,6 +77,7 @@ namespace WindowsPhoneApp
                 };
                 icon.Title = "My position";
                 icon.Location = position.Coordinate.Point;
+                currentLocation = icon;
                 myMapControl.MapElements.Add(icon);
                 myMapControl.Center = position.Coordinate.Point;
                 await myMapControl.TrySetViewAsync(position.Coordinate.Point, 15);
@@ -149,6 +151,13 @@ namespace WindowsPhoneApp
 
 
             myMapControl.MapElements.Clear();
+
+            if (currentLocation != null)
+            {
+                myMapControl.MapElements.Add(currentLocation);
+
+            }
+            
             try
             {
                 //per il momento nessun check sull'ora
@@ -157,7 +166,37 @@ namespace WindowsPhoneApp
                             select places;
                 IEnumerable<ParseObject> results = await query.FindAsync();
 
-                
+                DateTime now = DateTime.Now;
+
+                TimeSpan daytimenow = now.TimeOfDay; //Time right now.
+
+                string dow = "";
+
+                switch (now.DayOfWeek)
+                {
+                    case DayOfWeek.Monday:
+                        dow = "MON";
+                        break;
+                    case DayOfWeek.Tuesday:
+                        dow = "TUE";
+                        break;
+                    case DayOfWeek.Wednesday:
+                        dow = "WED";
+                        break;
+                    case DayOfWeek.Thursday:
+                        dow = "THU";
+                        break;
+                    case DayOfWeek.Friday:
+                        dow = "FRI";
+                        break;
+                    case DayOfWeek.Saturday:
+                        dow = "SAT";
+                        break;
+                        
+                    case DayOfWeek.Sunday:
+                        dow = "SUN";
+                        break;
+                }
 
                 foreach (ParseObject obj in results)
                 {
@@ -166,13 +205,17 @@ namespace WindowsPhoneApp
                     {
                         MapIcon icon = new MapIcon() { };
                         RegistrationManager.getInstance().reset(obj);
-                        icon.Title = RegistrationManager.getInstance().LocalName;
-                        icon.Location = new Geopoint(new BasicGeoposition()
+                        if (RegistrationManager.getInstance().isAvaliable(daytimenow, dow)) 
                         {
-                            Latitude = RegistrationManager.getInstance().Lat,
-                            Longitude = RegistrationManager.getInstance().Lng
-                        });
-                        myMapControl.MapElements.Add(icon);
+                            icon.Title = RegistrationManager.getInstance().LocalName;
+                            icon.Location = new Geopoint(new BasicGeoposition()
+                            {
+                                Latitude = RegistrationManager.getInstance().Lat,
+                                Longitude = RegistrationManager.getInstance().Lng
+                            });
+                            myMapControl.MapElements.Add(icon);
+                        }
+                       
                     }
 
                     

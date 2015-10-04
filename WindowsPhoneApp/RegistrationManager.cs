@@ -39,7 +39,10 @@ namespace WindowsPhoneApp
         private IDictionary<string, string> daytime = new Dictionary<string,string>();
 
         /*Private, singleton pattern*/
-        private RegistrationManager() { }
+        private RegistrationManager() 
+        {
+            currAccount = null;
+        }
     
         public static RegistrationManager getInstance()
         {
@@ -83,6 +86,20 @@ namespace WindowsPhoneApp
             this.daytime = dictionary;
         }
 
+        public Boolean isAvaliable(TimeSpan daytimenow, string dow)
+        {
+            DayTimespan availability =  Newtonsoft.Json.JsonConvert.DeserializeObject<DayTimespan>(daytime[dow]);
+            if (TimeSpan.Compare(daytimenow, availability.MorningBeginningTimespan) == 1 &&
+                TimeSpan.Compare(daytimenow, availability.MorningEndingTimespan) == -1 && !availability.isFree)
+                return true;
+
+            if (TimeSpan.Compare(daytimenow, availability.AfternoonBeginningTimespan) == 1 &&
+                TimeSpan.Compare(daytimenow, availability.AfternoonEndingTimespan) == -1 && !availability.isFree)
+                return true;
+
+            return false;
+        }
+
         /*could be implemented in a safer way, but for university purpose it is enogh*/
         public IDictionary<string, string> getDictionary()
         {
@@ -102,7 +119,6 @@ namespace WindowsPhoneApp
             obj["lat"] = Lat;
             obj["lng"] = Lng;
             obj["dictionary"] = daytime;
-
             return obj;
         }
 
@@ -117,10 +133,6 @@ namespace WindowsPhoneApp
             Lat = account.Get<double>("lat");
             Lng = account.Get<double>("lng");
             replaceDictionary(account.Get<IDictionary<string, string>>("dictionary"));
-            currAccount = account;
         }
-
-        
-    
     }
 }

@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Style="{StaticResource Background}">
         <Maps:MapControl
             x:Name="myMapControl"
             MapServiceToken="AjEZ-b8X6ryrr9PCwx1h2WOGpkB_xiNT_qB5t42HSqzchmri57-w6BYnrDX1pIfh"

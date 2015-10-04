@@ -8,11 +8,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Style="{StaticResource Background}">
         <TextBlock x:Name="registrationVariant"
             FontSize="20"
                    Margin="10,10,10,0"
-                   Opacity="0.7"> 	
+                   Opacity="0.7"
+                   Style="{StaticResource TextColor}"> 	
             <Run Text="Almost done!"/>
             <LineBreak/>
             <Run Text="Let us know your opening times."/>
@@ -25,7 +26,8 @@
                    Opacity="0.7"
                    Text="Modify the opening times for "
                    TextWrapping="Wrap"
-                   Visibility="Collapsed"> 	
+                   Visibility="Collapsed"
+                   Style="{StaticResource TextColor}"> 	
                    
         </TextBlock>
         <TextBlock x:Name="days"
@@ -33,36 +35,43 @@
                   HorizontalAlignment="Left"
                    Margin="10,120,10,0"
                    Text="Monday"
-                   FontSize="30"/>
+                   FontSize="30"
+                   Style="{StaticResource TextColor}"/>
             
         <CheckBox VerticalAlignment="Top"
                   HorizontalAlignment="Right"
                   Margin="0,110,0,0"
                   x:Name="dayOffBox"
-                  Content="Day off?" Checked="DayOff_Checked"/>
+                  Content="Day off?" Checked="DayOff_Checked"
+                  Foreground="Black"/>
         <TextBlock Text="Morning:"
                    FontSize="20"
                    VerticalAlignment="Top"
                    Margin="10,170,10,0"
+                   Style="{StaticResource TextColor}"
                    />       
         <TimePicker x:Name="openingAMTimePicker"
                     VerticalAlignment="Bottom"
                     Header="Opening time"
                     Margin="10,0,10,350"
                     MinuteIncrement="15"
-                    ClockIdentifier="12HourClock"/>
+                    ClockIdentifier="12HourClock"
+                    Foreground="Black"/>
 
         <TimePicker x:Name="closingAMTimePicker"
                     VerticalAlignment="Bottom"
                     Header="Closing time"
                     Margin="10,0,10,280"
                     MinuteIncrement="15"
-                    ClockIdentifier="12HourClock"/>
+                    ClockIdentifier="12HourClock" 
+                    Foreground="Black"
+                    />
 
         <TextBlock Text="Afternoon:"
                    FontSize="20"
                    VerticalAlignment="Top"
                    Margin="10,360,10,0"
+                   Style="{StaticResource TextColor}"
                    />
 
         <TimePicker x:Name="openingPMTimePicker"
@@ -70,14 +79,16 @@
                     Header="Opening time"
                     Margin="10,0,10,160"
                     MinuteIncrement="15"
-                    ClockIdentifier="12HourClock"/>
+                    ClockIdentifier="12HourClock"
+                    Foreground="Black"/>
 
         <TimePicker x:Name="closingPMTimePicker"
                     VerticalAlignment="Bottom"
                     Header="Closing time"
                     Margin="10,0,10,90"
                     MinuteIncrement="15"
-                    ClockIdentifier="12HourClock"/>
+                    ClockIdentifier="12HourClock"
+                    Foreground="Black"/>
 
         <Button x:Name="submitOpeningTimes"
                 VerticalAlignment="Bottom"
