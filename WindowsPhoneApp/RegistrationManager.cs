@@ -14,7 +14,7 @@ namespace WindowsPhoneApp
     {
         private static RegistrationManager manager = new RegistrationManager();
 
-        public static readonly string ParseName = "account_2";
+        public static readonly string ParseName = "account_1";
 
         public enum DayOfWeek
         {
