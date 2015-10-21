@@ -208,8 +208,8 @@ namespace WindowsPhoneApp
                         manager.Lng = result.Locations[0].Point.Position.Longitude;
 
 
-                        MessageDialog msg = new MessageDialog("Latitude: " + manager.Lat + "Longitude: " + manager.Lng);
-                        await msg.ShowAsync();
+                        //MessageDialog msg = new MessageDialog("Latitude: " + manager.Lat + "Longitude: " + manager.Lng);
+                        //await msg.ShowAsync();
                     }
                     catch (Exception e)
                     {
