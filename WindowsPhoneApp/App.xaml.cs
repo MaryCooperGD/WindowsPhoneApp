@@ -36,6 +36,7 @@ namespace WindowsPhoneApp
         /// </summary>
         public App()
         {
+            
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;

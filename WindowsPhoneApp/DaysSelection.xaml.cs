@@ -39,7 +39,7 @@ namespace WindowsPhoneApp
 
         private void daySelected(object sender, TappedRoutedEventArgs e)
         {
-            TextBlock day = (TextBlock)sender ;
+            TextBlock day = (TextBlock)sender;
             String dayS = day.Text;
             Frame.Navigate(typeof(SecondRegistrationPage), dayS);
             Frame.BackStack.RemoveAt(Frame.BackStack.Count() - 1);
